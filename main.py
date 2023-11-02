@@ -22,7 +22,7 @@ for filename in os.listdir('./cogs'):
             bot.load_extension(f'cogs.{filename[:-3]}')
 
 
-bot.run("MTE1MTM3OTQwNzI5OTE0OTgyNA.GCCiDu.0L6IavdUSVhYdx6cI2Acx2-ruTI9D6IM0R063k")
+bot.run("Bot_Token")
 
 #обработка ошибок
 @bot.event
