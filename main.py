@@ -1,18 +1,3 @@
-import os
-import disnake
-from disnake.ext import commands
-
-command_sync_flags = commands.CommandSyncFlags.default()
-command_sync_flags.sync_commands_debug = True
-bot = commands.Bot(
-    command_prefix='.',
-    intents=disnake.Intents.all(),
-    test_guilds=[767577186995011634],
-    help_command=None,
-    command_sync_flags=command_sync_flags
-    )
-# Когда бот готов
-@bot.event
 async def on_ready():
     print("Бот готов!")
 
@@ -20,9 +5,20 @@ async def on_ready():
 for filename in os.listdir('./cogs'):
         if filename.endswith('.py'):
             bot.load_extension(f'cogs.{filename[:-3]}')
+# Инициализация базы данных
+conn = sqlite3.connect('C:\\Users\\Admin\\Desktop\\FunGame\\rps_rating.db')
+cursor = conn.cursor()
 
+# Создание таблицы, если она не существует
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS rating (
+    user_id INTEGER PRIMARY KEY,
+    rating INTEGER
+)
+""")
+conn.commit()
 
-bot.run("Bot_Token")
+bot.run("Token")
 
 #обработка ошибок
 @bot.event
